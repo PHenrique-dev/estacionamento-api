@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
-const veiculo = mongoose.model('Veiculo', {
-    nome: String,
-    marca: String,
-    modelo: Number,
-    approved: Boolean,
+
+const VeiculoSchema = new mongoose.Schema({
+  nome: String,
+  marca: String,
+  modelo: String,
+  approved: Boolean,
 });
-module.exports = veiculo
+
+const Veiculo = mongoose.model('Veiculo', VeiculoSchema);
+
+module.exports = Veiculo;
