@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const Veiculo = require('../models/veiculo.js');
+const Veiculo = require('./veiculo.js');
 app.use(
     express.urlencoded({
         extended: true,
@@ -163,7 +163,9 @@ app.get("/", (req, res) =>{
 //conexão ao mongoose
 const DB_USER = 'pedroiga3'
 const DB_PASSWORD ='c4d3b3b3'
-mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.p97heyp.mongodb.net/?retryWrites=true&w=majority`,)
+mongoose
+.connect(
+    `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster.iud77kb.mongodb.net/?retryWrites=true&w=majority`,)
 .then(() => {
     console.log("conectamos ao Mongodb")
     app.listen(3000, () =>{

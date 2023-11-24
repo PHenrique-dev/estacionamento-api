@@ -6,9 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    
-  },
+  "repository": {},
   "author": "Pedro Henrique",
   "license": "ISC",
   "bugs": {
@@ -16,6 +14,7 @@
   },
   "homepage": "https://github.com/PHenrique-dev/estacionamento-api#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^8.0.1"
   }
 }
