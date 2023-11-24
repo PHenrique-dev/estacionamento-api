@@ -114,7 +114,7 @@ app.patch('/carros/:id', async (req, res) => {
       res.status(500).json({ erro: error })
     }
   })
-  app.patch('/carros/:id', async (req, res) => {
+  app.patch('/motos/:id', async (req, res) => {
       const id = req.params.id
       
       const { nome, marca, modelo, approved } = req.body
@@ -153,6 +153,24 @@ app.delete('/carros/:id', async (req, res) => {
         await Veiculo.deleteOne({ _id: id })
         
         res.status(200).json({ message: 'Carro removido com sucesso!' })
+    } catch (error) {
+        res.status(500).json({ erro: error })
+    }
+})
+app.delete('/motos/:id', async (req, res) => {
+    const id = req.params.id
+    
+    const veiculo = await Veiculo.findOne({ _id: id })
+    
+    if (!veiculo) {
+        res.status(422).json({ message: 'Moto não encontrado!' })
+        return
+    }
+    
+    try {
+        await Veiculo.deleteOne({ _id: id })
+        
+        res.status(200).json({ message: 'Moto removida com sucesso!' })
     } catch (error) {
         res.status(500).json({ erro: error })
     }
