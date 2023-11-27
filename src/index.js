@@ -15,7 +15,9 @@ app.use(
         extended: true,
     }),
     )
-    
+const routes = require("./routes/router.js")
+app.use("/api", routes)
+
     app.post("/carros", async (req, res) =>{
     const {nome, marca, modelo, approved} = req.body;
     const carros = {
