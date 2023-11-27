@@ -45,10 +45,30 @@ const carrosController = {
                 res.status(404).json({msg: "Carro não encontrado"})
                 return
             }
-            const deleteCarro = await CarrosModel.findByIdAndDelete(id)
+            const deletedCarro = await CarrosModel.findByIdAndDelete(id)
+            res.status(200).json({deletedCarro, msg:"Carro retirado"})
         } catch (error) {
             console.log(error)
         }
     },
+    update:  async(req, res) =>{
+        try {
+            const id = req.params.id
+            const carros = {
+                nome: req.body.nome,
+                marca: req.body.marca,
+                modelo: req.body.modelo, 
+                approved: req.body.approved
+               } 
+            const updateCarros = await CarrosModel.findByIdAndUpdate(id, carros)
+            if(!updateCarros){
+                res.status(404).json({msg: "Carro não encontrado"})
+                return
+            }
+            res.status(200).json({carros, msg: "Descrição do carro trocada"})
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 module.exports = carrosController
