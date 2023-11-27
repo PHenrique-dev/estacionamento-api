@@ -1,11 +1,22 @@
 const mongoose = require('mongoose');
 
 const MotosSchema = new mongoose.Schema({
-  nome: String,
-  marca: String,
-  modelo: String,
-  approved: Boolean,
-});
+    nome:{
+        type: String,
+        required: true
+      },
+      marca:{
+        type: String,
+        required: true
+      },
+      modelo:{
+        type: String,
+        required: true
+      },
+      approved: Boolean,
+},
+{ timestamps: true }
+);
 
 const Motos = mongoose.model('Motos', MotosSchema);
 
