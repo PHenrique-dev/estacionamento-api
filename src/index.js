@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require("cors")
 const Carros = require('./models/carros.js');
+const Motos = require('./models/motos.js');
 app.use(cors())
 app.use(express.json())
 const conn = require("./config/conn.js")
@@ -32,14 +33,14 @@ app.use(
 });
 app.post("/motos", async (req, res) =>{
     const {nome, marca, modelo, approved} = req.body;  
-    const carros = {
+    const motos = {
         nome,
         marca,
         modelo, 
         approved
     }  
     try{
-        await Carros.create(carros)
+        await Motos.create(motos)
         res.status(201).json("Moto guardada com sucesso")
     }catch(error){
         res.status(500).json("Moto não encontrada");  
@@ -56,9 +57,9 @@ app.get('/carros', async (req, res) => {
 })
 app.get('/motos', async (req, res) => {
     try {
-        const carros = await Carros.find()
+        const motos = await Motos.find()
         
-        res.status(200).json(carros)
+        res.status(200).json(motos)
     } catch (error) {
         res.status(500).json({ erro: error })
     }
@@ -83,14 +84,14 @@ app.get('/motos/:id', async (req, res) => {
     const id = req.params.id
     
     try {
-        const carros = await Carros.findOne({ _id: id })
+        const motos = await Motos.findOne({ _id: id })
         
-        if (!carros) {
+        if (!motos) {
         res.status(422).json({ message: 'Moto não encontrado!' })
         return
     }
   
-    res.status(200).json(carros)
+    res.status(200).json(motos)
 } catch (error) {
       res.status(500).json({ erro: error })
     }
@@ -125,7 +126,7 @@ app.patch('/carros/:id', async (req, res) => {
       
       const { nome, marca, modelo, approved } = req.body
       
-      const carros = {
+      const motos = {
           nome,
           marca,
           modelo, 
@@ -133,14 +134,14 @@ app.patch('/carros/:id', async (req, res) => {
     }
   
     try {
-      const updatedCarros = await Carros.updateOne({ _id: id }, carros)
+      const updatedMotos = await Motos.updateOne({ _id: id }, motos)
   
-      if (updatedCarros.matchedCount === 0) {
+      if (updatedMotos.matchedCount === 0) {
         res.status(422).json({ message: 'Moto não encontrado!' })
         return
     }
   
-    res.status(200).json(carros)
+    res.status(200).json(motos)
 } catch (error) {
     res.status(500).json({ erro: error })
     }
@@ -166,15 +167,15 @@ app.delete('/carros/:id', async (req, res) => {
 app.delete('/motos/:id', async (req, res) => {
     const id = req.params.id
     
-    const carros = await Carros.findOne({ _id: id })
+    const motos = await Motos.findOne({ _id: id })
     
-    if (!carros) {
+    if (!motos) {
         res.status(422).json({ message: 'Moto não encontrado!' })
         return
     }
     
     try {
-        await Carros.deleteOne({ _id: id })
+        await Motos.deleteOne({ _id: id })
         
         res.status(200).json({ message: 'Moto removida com sucesso!' })
     } catch (error) {
@@ -184,4 +185,3 @@ app.delete('/motos/:id', async (req, res) => {
 app.get("/", (req, res) =>{
     res.json({mensagem: 'API rodando!'})
 });
-//conexão ao mongoose
