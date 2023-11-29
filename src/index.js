@@ -42,4 +42,15 @@ app.post("/auth/register", async(req, res) =>{
     }
     const salt = await bcrypt.genSalt(12)
     const passwordHash = await bcrypt.hash(password, salt)
+    const user = new User({
+        name,
+        email,
+        password: passwordHash,
+    })
+    try {
+      await user.save()
+      res.status(201).json({msg: 'Bem vindo(a) ao nosso estacionamento!'})  
+    } catch (error) {
+        res.status(500).json({msg: error})
+    }
 })
