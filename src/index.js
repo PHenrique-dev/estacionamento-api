@@ -76,7 +76,7 @@ app.post("/auth/register", async(req, res) =>{
         res.status(500).json({msg: error})
     }
 })
-app.post("auth/user", async (req, res) =>{
+app.post("/auth/user", async (req, res) =>{
     const{ email, password } = req.body
     if(!email){
         return res.status(422).json({msg: "O email é obrigatório"})
