@@ -22,6 +22,15 @@ app.use("/api", routes)
 app.get("/", (req, res) =>{
     res.json({mensagem: 'API rodando!'})
 });
+app.get('/user/:id', async(req, res) =>{
+    const id = req.params.id
+    const user = await User.findById(id, '-password')
+    if(!user){
+        return res.status(404).json({msg: 'Usuário não encontrado'})
+    }
+    res.status(200).json({user})
+})
+
 app.post("/auth/register", async(req, res) =>{
     const{ name, email, password, confirmpassword } = req.body
     if(!name){
