@@ -40,4 +40,6 @@ app.post("/auth/register", async(req, res) =>{
     if(userExists){
         return res.status(422).json({msg: "Email já registrado"})
     }
+    const salt = await bcrypt.genSalt(12)
+    const passwordHash = await bcrypt.hash(password, salt)
 })
