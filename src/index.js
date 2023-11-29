@@ -22,7 +22,7 @@ app.use("/api", routes)
 app.get("/", (req, res) =>{
     res.json({mensagem: 'API rodando!'})
 });
-app.get('/user/:id', async(req, res) =>{
+app.get('/user/:id', checkToken, async(req, res) =>{
     const id = req.params.id
     const user = await User.findById(id, '-password')
     if(!user){
@@ -30,7 +30,20 @@ app.get('/user/:id', async(req, res) =>{
     }
     res.status(200).json({user})
 })
-
+function checkToken(req, res, next){
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(" ")[1]
+    if(!token){
+        return res.sendStatus(401).json({msg: "Acesso negado"})
+    }
+    try {
+        const secret = process.env.SECRET
+        jwt.verify(token, secret)
+        next()
+    } catch (error) {
+        return res.sendStatus(400).json({msg: "Token inválido"})
+    }
+}
 app.post("/auth/register", async(req, res) =>{
     const{ name, email, password, confirmpassword } = req.body
     if(!name){
