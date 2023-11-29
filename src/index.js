@@ -36,5 +36,8 @@ app.post("/auth/register", async(req, res) =>{
     if(password !== confirmpassword){
         return res.status(422).json({msg: "As senhas não são iguais"})
     }
-    
+    const userExists = await User.findOne({ email:email })
+    if(userExists){
+        return res.status(422).json({msg: "Email já registrado"})
+    }
 })
