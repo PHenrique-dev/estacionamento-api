@@ -64,6 +64,19 @@ app.post("auth/user", async (req, res) =>{
     }
     const user = await User.findOne({ email:email })
     if(!user){
-        return res.status(422).json({msg: "Usuário não existe"})
+        return res.status(404).json({msg: "Usuário não existe"})
+    }
+    const checkPassword = await bcrypt.compare(password, user.password)
+    if(!checkPassword){
+        return res.status(422).json({msg: "Senha inválida"})  
+    }
+    try {
+        const secret = process.env.SECRET
+        const token = jwt.sign({
+            id:user._id
+        }, secret)
+        res.status(200).json({msg: "Autenticação realizada com sucesso!", token})
+    } catch (error) {
+        res.status(500).json({msg: error})
     }
 })
