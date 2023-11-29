@@ -54,3 +54,16 @@ app.post("/auth/register", async(req, res) =>{
         res.status(500).json({msg: error})
     }
 })
+app.post("auth/user", async (req, res) =>{
+    const{ email, password } = req.body
+    if(!email){
+        return res.status(422).json({msg: "O email é obrigatório"})
+    }
+    if(!password){
+        return res.status(422).json({msg: "A senha é obrigatória"})
+    }
+    const user = await User.findOne({ email:email })
+    if(!user){
+        return res.status(422).json({msg: "Usuário não existe"})
+    }
+})
