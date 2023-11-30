@@ -30,7 +30,7 @@ app.get('/user/:id', checkToken, async(req, res) =>{
     }
     res.status(200).json({user})
 })
-/*function checkToken(req, res, next){
+function checkToken(req, res, next){
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(" ")[1]
     if(!token){
@@ -43,7 +43,7 @@ app.get('/user/:id', checkToken, async(req, res) =>{
     } catch (error) {
         return res.status(400).json({msg: "Token inválido"})
     }
-}*/
+}
 app.post("/auth/register", async(req, res) =>{
     const{ name, email, password, confirmpassword } = req.body
     if(!name){
