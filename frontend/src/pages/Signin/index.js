@@ -3,6 +3,7 @@ import Input from "../../components/Input";
 import Button from "../../components/Butoon";
 import * as C from "./styles";
 import { Link, useNavigate } from "react-router-dom";
+import { postFunction } from "../../hooks/APIServices";
 import useAuth from "../../hooks/useAuth";
 
 const Signin = () => {
@@ -12,7 +13,11 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
-
+function btnPost(){
+  postFunction()
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+}
   const handleLogin = () => {
     if (!email | !senha) {
       setError("Preencha todos os campos");
@@ -46,7 +51,10 @@ const Signin = () => {
           onChange={(e) => [setSenha(e.target.value), setError("")]}
         />
         <C.labelError>{error}</C.labelError>
-        <Button Text="Entrar" onClick={handleLogin} />
+        <Button Text="Entrar" onClick={() =>{
+          btnPost();
+          handleLogin();} }/>
+  
         <C.LabelSignup>
           Não tem uma conta?
           <C.Strong>
