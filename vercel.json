@@ -1,15 +1,15 @@
 {
     "version": 2,
+    "functions": {
+      "backend/index.js": {
+        "runtime": "nodejs14.x"
+      }
+    },
     "routes": [
       {
         "src": "/api/(.*)",
         "dest": "/backend/$1"
       }
-    ],
-    "functions": {
-      "backend/index.js": {
-        "runtime": "nodejs14.x"
-      }
-    }
+    ]
   }
   
