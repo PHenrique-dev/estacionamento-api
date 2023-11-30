@@ -1,14 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './pages/App';
-import axios from 'axios';
+import { createRoot } from 'react-dom/client'
+import App from './App'
 
-axios.defaults.baseURL = 'http://localhost:3000/api';
-
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
-);
+const root = createRoot(document.querySelector("#root"))
+root.render(<App/>)
