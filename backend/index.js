@@ -16,7 +16,7 @@ app.use(
         extended: true,
     }),
     )
-app.use("/api", routes)
+app.use("/api", router)
 app.get("/", (req, res) =>{
     res.json(200)
 });

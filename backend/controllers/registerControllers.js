@@ -1,6 +1,6 @@
 const {NewUser} = require ("../models/register")
 const bcrypt = require('bcrypt')
-async function NewUserController() {
+async function NewUserController(req, res) {
     const{ name, email, password, confirmpassword } = req.body
         if(!name){
             return res.status(422).json({msg: "O nome é obrigatório"})
@@ -33,4 +33,4 @@ async function NewUserController() {
         }
 }
 
-export {NewUserController}
+module.exports = { NewUserController };

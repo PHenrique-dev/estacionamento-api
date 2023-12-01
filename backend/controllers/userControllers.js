@@ -1,8 +1,8 @@
-const {User} = require ("../models/User")
+const {UserModel} = require ("../models/User")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-async function User(){
+async function User(req, res){
     const{ email, password } = req.body
     if(!email){
         return res.status(422).json({msg: "O email é obrigatório"})
@@ -28,7 +28,7 @@ async function User(){
         res.status(500).json({msg: error})
     }
 }
-async function getUser(){
+async function getUser(req, res){
     const id = req.params.id
     const user = await User.findById(id, '-password')
     if(!user){
@@ -50,4 +50,4 @@ function checkToken(req, res, next){
         return res.status(400).json({msg: "Token inválido"})
     }
 }
-export {User, getUser, checkToken}
+module.exports = {User, getUser, checkToken}
