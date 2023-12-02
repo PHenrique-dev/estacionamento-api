@@ -1,3 +1,6 @@
+const express = require('express');
+const app = express();
+app.use(express.json());
 const {NewUser} = require ("../models/register")
 const bcrypt = require('bcrypt')
 async function NewUserController(req, res) {
