@@ -10,7 +10,7 @@ async function User(req, res){
     if(!password){
         return res.status(422).json({msg: "A senha é obrigatória"})
     }
-    const user = await User.findOne({ email:email })
+    const user = await UserModel.findOne({ email:email })
     if(!user){
         return res.status(404).json({msg: "Usuário não existe"})
     }
