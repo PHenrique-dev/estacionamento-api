@@ -15,7 +15,7 @@ const NewUserSchema = new mongoose.Schema({
       },
     confirmpassword:{
         type: String,
-        required: true
+        required: false
       }
 },
 { timestamps: true }
@@ -23,4 +23,4 @@ const NewUserSchema = new mongoose.Schema({
 
 const NewUser = mongoose.model('NewUser', NewUserSchema);
 
-module.exports = NewUser;
+module.exports = {NewUser};

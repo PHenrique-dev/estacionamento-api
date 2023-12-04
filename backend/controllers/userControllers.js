@@ -30,7 +30,7 @@ async function User(req, res){
 }
 async function getUser(req, res){
     const id = req.params.id
-    const user = await User.findById(id, '-password')
+    const user = await UserModel.findById(id, '-password')
     if(!user){
         return res.status(404).json({msg: 'Usuário não encontrado'})
     }
