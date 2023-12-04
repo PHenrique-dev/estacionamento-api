@@ -1,4 +1,4 @@
-const {Carros: CarrosModel} = require ("../models/carros")
+const CarrosModel = require("../models/carros");
 
 const carrosController = {
     create: async(req, res) => {

@@ -1,4 +1,4 @@
-const {Motos: MotosModel} = require ("../models/motos")
+const MotosModel = require ("../models/motos")
 
 const motosController = {
     create: async(req, res) => {
@@ -10,7 +10,7 @@ const motosController = {
             approved: req.body.approved
            } 
            const response = await MotosModel.create(motos)
-           res.status(201).json({response, msg: "Carro guardado com sucesso"})
+           res.status(201).json({response, msg: "Moto guardada com sucesso"})
         } catch (error) {
             console.log(error)
         }
@@ -28,7 +28,7 @@ const motosController = {
           const id = req.params.id
           const motos = await MotosModel.findById(id)
             if(!motos){
-                res.status(404).json({msg: "Carro não encontrado"})
+                res.status(404).json({msg: "Moto não encontrada"})
                 return
             }
 
@@ -42,11 +42,11 @@ const motosController = {
             const id = req.params.id
             const motos = await MotosModel.findById(id)
             if(!motos){
-                res.status(404).json({msg: "Carro não encontrado"})
+                res.status(404).json({msg: "Moto não encontrada"})
                 return
             }
             const deletedCarro = await MotosModel.findByIdAndDelete(id)
-            res.status(200).json({deletedCarro, msg:"Carro retirado"})
+            res.status(200).json({deletedCarro, msg:"Moto retirada"})
         } catch (error) {
             console.log(error)
         }
@@ -62,10 +62,10 @@ const motosController = {
                } 
             const updateMotos = await MotosModel.findByIdAndUpdate(id, motos)
             if(!updateMotos){
-                res.status(404).json({msg: "Carro não encontrado"})
+                res.status(404).json({msg: "Moto não encontrado"})
                 return
             }
-            res.status(200).json({motos, msg: "Descrição do carro trocada"})
+            res.status(200).json({motos, msg: "Descrição da moto trocada"})
         } catch (error) {
             console.log(error)
         }
